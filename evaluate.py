@@ -1,9 +1,14 @@
 from langsmith.evaluation import LangChainStringEvaluator, evaluate
+from langchain_core.messages import HumanMessage
+from langchain_anthropic.chat_models import ChatAnthropic
 
 
 def predict_answer(example: dict):
     """Use this for answer evaluation"""
     question = example.get("question")
+
+    # Define or import the 'app' variable here
+    app = ...
 
     final_state = app.invoke(
       {"messages": [HumanMessage(content=question)]},
@@ -11,8 +16,6 @@ def predict_answer(example: dict):
     )
     answer = final_state["messages"][-1].content
     return {"answer": answer}
-
-
 
 eval_llm = ChatAnthropic(temperature=0.0, model="claude-3-5-sonnet-20240620")
 
@@ -28,6 +31,9 @@ qa_evalulator = [
         config={"llm": eval_llm}
       ),
 ]
+
+dataset_name = "warren-buffett-agent-test-0.0.4"
+
 experiment_results = evaluate(
     predict_answer,
     data=dataset_name,
