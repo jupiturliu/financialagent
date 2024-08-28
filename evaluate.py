@@ -1,3 +1,6 @@
+from langsmith.evaluation import LangChainStringEvaluator, evaluate
+
+
 def predict_answer(example: dict):
     """Use this for answer evaluation"""
     question = example.get("question")
@@ -10,7 +13,6 @@ def predict_answer(example: dict):
     return {"answer": answer}
 
 
-from langsmith.evaluation import LangChainStringEvaluator, evaluate
 
 eval_llm = ChatAnthropic(temperature=0.0, model="claude-3-5-sonnet-20240620")
 
