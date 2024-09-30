@@ -1,9 +1,10 @@
-import getpass
 import os
+from dotenv import load_dotenv
 
 def set_api_keys():
-    os.environ["ANTHROPIC_API_KEY"] = getpass.getpass("Enter your Anthropic API key: ")
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google API key: ")
-    os.environ["FINANCIAL_DATASETS_API_KEY"] = getpass.getpass("Enter your Financial Datasets API key: ")
-    os.environ["LANGCHAIN_TRACING_V2"] = "True"
-    os.environ["LANGCHAIN_API_KEY"] = getpass.getpass("Enter your LangChain API key: ")
+    load_dotenv()  # Load environment variables from .env file
+    os.environ["ANTHROPIC_API_KEY"] = os.getenv("ANTHROPIC_API_KEY")
+    os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+    os.environ["FINANCIAL_DATASETS_API_KEY"] = os.getenv("FINANCIAL_DATASETS_API_KEY")
+    os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2", "True")
+    os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
